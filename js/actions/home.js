@@ -7,6 +7,9 @@
  */
 
 const MAP_TYPE_CHANGED = 'MAP_TYPE_CHANGED';
+const MAP_DATE_CHANGED = 'MAP_DATE_CHANGED';
+const MAP_DATE_PLUS = 'MAP_DATE_PLUS';
+const MAP_DATE_MINUS = 'MAP_DATE_MINUS';
 
 function changeMapType(mapType) {
     return {
@@ -15,4 +18,25 @@ function changeMapType(mapType) {
     };
 }
 
-module.exports = {MAP_TYPE_CHANGED, changeMapType};
+function changeDate(date) {
+    return {
+        type: MAP_DATE_CHANGED,
+        date
+    };
+}
+
+function changeDatePlus(date) {
+    return {
+        type: MAP_DATE_PLUS,
+        date
+    };
+}
+
+function changeDateMinus(date) {
+    return {
+        type: MAP_DATE_MINUS,
+        date
+    };
+}
+
+module.exports = {MAP_TYPE_CHANGED, MAP_DATE_CHANGED, MAP_DATE_PLUS, MAP_DATE_MINUS, changeMapType, changeDate, changeDatePlus, changeDateMinus};

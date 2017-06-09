@@ -2,7 +2,7 @@
 
     "proxyUrl": {
         "url": "/mapstore/proxy/?url=",
-        "useCORS": ["https://demo.geo-solutions.it/geoserver"]
+        "useCORS": ["http://demo.geo-solutions.it/geoserver", "https://demo.geo-solutions.it/geoserver"]
     },
     "geoStoreUrl": "/mapstore/rest/geostore/",
     "printUrl": "https://demo.geo-solutions.it/geoserver/pdf/info.json",
@@ -15,6 +15,7 @@
     "defaultMapOptions": {
       "cesium": {
           "flyTo": true,
+          "navigationTools": true,
           "terrainProvider": {
               "type": "cesium",
               "url": "https://assets.agi.com/stk-terrain/world",
@@ -32,7 +33,22 @@
                 "cfg": {
                     "tools": ["locate"]
                 }
-            }, "DrawerMenu", {
+            }, "Version", "DrawerMenu",
+            {
+                "name": "BackgroundSelector",
+                "cfg": {
+                    "bottom": 40,
+                    "dimensions": {
+                    "side": 65,
+                    "sidePreview": 65,
+                    "frame": 3,
+                    "margin": 5,
+                    "label": false,
+                    "vertical": true
+                   }
+                }
+            },
+            {
                 "name": "Identify",
                 "showIn": ["Settings"],
                 "cfg": {
@@ -63,9 +79,9 @@
             }, "Home", "TOC", {
                 "name": "Tutorial",
                 "cfg": {
-                    "preset": "mapMobile"
+                    "preset": "default_mobile_tutorial"
                 }
-            }, "BackgroundSwitcher", {
+            }, {
                 "name": "Settings",
                 "cfg": {
                     "wrap": true
@@ -109,9 +125,10 @@
                     }
                 }
             }, "Login",
-            "OmniBar", "BurgerMenu", "Expander"
+            "OmniBar", "BurgerMenu", "Expander", "GlobeViewSwitcher"
         ],
-        "desktop": ["Map", "Help", "Share", "DrawerMenu", {
+        "desktop": ["Map", "HelpLink", "Share", "DrawerMenu", "Version", {"name": "BackgroundSelector", "cfg": { "bottom": 40 } },
+            {
                 "name": "Identify",
                 "showIn": ["IdentifyBar", "Settings"],
                 "cfg": {
@@ -123,8 +140,20 @@
                         }
                     }
                 }
-            },
-            "MadeWithLove", {
+            },{
+                "name": "IdentifyChart",
+                "showIn": ["IdentifyBar"],
+                "cfg": {
+                  "enableRevGeocode": false,
+                    "viewerOptions": {
+                        "container": "{context.ReactSwipe}",
+                        "header": "{context.SwipeHeader}",
+                        "headerOptions": {
+                            "useButtons": true
+                        }
+                    }
+                }
+            }, "MadeWithLove", {
                 "name": "Locate",
                 "override": {
                     "Toolbar": {
@@ -136,12 +165,9 @@
                 "cfg": {
                     "activateQueryTool": true
                 }
-            }, "Tutorial", "BackgroundSwitcher", {
-                "name": "Measure",
-                "cfg": {
-                    "showResults": false
-                }
-            }, "MeasureResults", "Print", "ShapeFile", {
+            }, "Tutorial", {
+                "name": "Measure"
+            }, "Print", "ShapeFile", {
                 "name": "Settings",
                 "cfg": {
                     "wrap": true
@@ -172,7 +198,8 @@
                 "id": "IdentifyBar",
                 "stateSelector": "identify",
                 "cfg": {
-                    "id": "identifyBar"
+                    "id": "identifyBar",
+                    "layout": "horizontal"
                 },
                 "isDefault": false
             },
@@ -203,7 +230,13 @@
                     }
                 }
             },
-            "OmniBar", "Login", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "FullScreen"
+            "OmniBar", "Login", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "FullScreen", "GlobeViewSwitcher", "SearchServicesConfig",
+            {
+              "name": "ChangeDate",
+              "cfg" : {
+                "id": "mapstore-changedate-map"
+              }
+            }
         ],
         "embedded": [{
                 "name": "Map",
@@ -213,6 +246,19 @@
             }, {
               "name": "DrawerMenu",
               "hide": "{!(request.query && request.query.forceDrawer)}"
+              },{
+                  "name": "BackgroundSelector",
+                  "cfg": {
+                      "bottom": 40,
+                      "dimensions": {
+                      "side": 65,
+                      "sidePreview": 65,
+                      "frame": 3,
+                      "margin": 5,
+                      "label": false,
+                      "vertical": true
+                     }
+                  }
               }, {
                 "name": "Identify",
                 "cfg": {
@@ -247,7 +293,7 @@
                         "alwaysVisible": true
                     }
                 }
-            }, "TOC", "BackgroundSwitcher", {
+            }, "TOC", {
                 "name": "Settings",
                 "cfg": {
                     "wrap": true
@@ -285,8 +331,14 @@
             "cfg": {
                 "className": "navbar shadow navbar-home"
             }
-        }, "ManagerMenu", "Login", "Language", "Attribution", "ScrollTop"],
-        "maps": ["Header", "Fork", "MapSearch", "HomeDescription", "MapType", "ThemeSwitcher",  "GridContainer", "CreateNewMap", "Maps", "Examples", "Footer"],
+        }, "ManagerMenu", "Login", "Language", "ScrollTop", "Attribution"],
+        "maps": ["Header", "HomeDescription", "GridContainer", "CreateNewMap", "Maps",
+        {
+          "name": "ChangeDate",
+          "cfg" : {
+            "id": "mapstore-changedate"
+          }
+        }],
         "manager": ["Header", "Redirect", "Manager", "Home", "UserManager", "GroupManager", "Footer"]
     }
 }

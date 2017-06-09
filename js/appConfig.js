@@ -32,6 +32,10 @@ module.exports = {
     initialState: {
         defaultState: {
             mousePosition: {enabled: false},
+            maptype: {mapType: "openlayers"},
+            mapInfo: {enabled: false, infoFormat: 'application/json' },
+            mapInfoChart: {enabled: false, infoFormat: 'application/json' },
+            theme: {selectedTheme: {id: "ait"}},
             controls: {
                 help: {
                     enabled: false

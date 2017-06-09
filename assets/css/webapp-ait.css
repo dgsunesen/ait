@@ -1,0 +1,37 @@
+.mapstore-header {
+    background-image: url('../img/lamma_spazz_header.jpg') !important;
+    top: 27px !important;
+    height: 150px !important;
+}
+
+.customer-logo {
+    height: 88.8px;
+}
+#mapstore-changedate-map {
+    position: absolute;
+    top: 55px;
+    right: 10px;
+    width: 350px;
+    height: 100px;
+    bottom: 50px;
+}
+
+#mapstore-changedate {
+    margin-top: 50px;
+}
+
+#mapstore-changedate-map .center .input-group-btn:last-child > .btn, .db_meteo .input-group-btn:last-child > .btn-group {
+    margin-left: 10px;
+}
+
+#mapstore-changedate-map .center .input-group-btn:first-child > .btn, .db_meteo .input-group-btn:first-child > .btn-group {
+    margin-right: 10px;
+}
+
+#mapstore-changedate .center .input-group-btn:last-child > .btn, .db_meteo .input-group-btn:last-child > .btn-group {
+    margin-left: 10px;
+}
+
+#mapstore-changedate .center .input-group-btn:first-child > .btn, .db_meteo .input-group-btn:first-child > .btn-group {
+    margin-right: 10px;
+}

@@ -69,7 +69,7 @@
         "permissions": "Permissions",
         "home":{
             "open": "Ouvrir",
-            "description": "MapStore 2 est développé pour créer, sauvegarder et partager de façon simple et intuitive cartes et assemblages créés à partir du contenu de serveurs tel que OpenStreetMap, Google Maps, MapQuest ou tout autre serveur spécifique fourni par votre organisation ou une organisation tierce.<br/>Visitez notre <a href=\"/mapstore/docs/\">page d'accueil</a> pour plus de détails.",
+            "description": "LaMMA Consortium - Contrôle des stations météorologiques et des mentions.",
             "Applications": "Applications",
             "Examples": "Exemples",
             "LinkedinGroup": "Mapstore Linkedin groupe",
@@ -128,6 +128,7 @@
             "editMapMetadata":"Modifier les propriétés de la carte",
             "mapTypes_combo": "Selectionner le viewer de carte: ",
             "theme_combo": "Sélectionne un thème:",
+            "date_picker": "Sélectionnez une date:",
             "maps_title": "Cartes",
             "locales_combo": "Langue:"
         },

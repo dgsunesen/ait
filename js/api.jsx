@@ -17,6 +17,6 @@ const MapStore2 = require('../MapStore2/web/client/jsapi/MapStore2')
       },
       noLocalConfig: true,
       initialState: require('./appConfigEmbedded').initialState,
-      translations: getScriptPath() + '/../translations'
+      translations: getScriptPath() + '/../MapStore2/web/client/translations'
   });
 window.MapStore2 = MapStore2;

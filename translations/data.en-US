@@ -68,7 +68,7 @@
         "permissions": "Permissions",
         "home":{
             "open": "Open",
-            "description": "MapStore 2 has been developed to create, save and share in a simple and intuitive way maps and mashups created selecting contents coming from well-known sources like Google Maps and OpenStreetMap or from services provided by organizations using open protocols like OGC WMS, WFS, WMTS or TMS and so on.<br/>Visit the <a href=\"/mapstore/docs/\">home page</a> for more details.",
+            "description": "LaMMA Consortium - Control of weather stations and spatializations.",
             "Applications": "Applications",
             "Examples": "Examples",
             "LinkedinGroup": "Mapstore Linkedin Group",
@@ -127,6 +127,7 @@
             "editMapMetadata":"Edit Map Properties",
             "mapTypes_combo": "Select Map Viewer: ",
             "theme_combo": "Select Theme:",
+            "date_picker": "Select a date:",
             "maps_title": "Maps",
             "locales_combo": "Language:"
         },

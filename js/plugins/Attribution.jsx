@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 const React = require('react');
-const src = require("./attribution/geosolutions-brand.png");
+const src = require("./attribution/logo-Interno-2.png");
 const assign = require('object-assign');
 
 const Attribution = React.createClass({
@@ -38,7 +38,7 @@ module.exports = {
     AttributionPlugin: assign(Attribution, {
         OmniBar: {
             position: 1,
-            tool: () => <div className="navbar-header"><img className="customer-logo" src={src} height="36" /></div>,
+            tool: () => <div className="navbar-header"><img className="customer-logo" src={src} height="88.8" /></div>,
             priority: 1
         }
     })

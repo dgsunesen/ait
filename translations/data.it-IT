@@ -68,7 +68,7 @@
         "permissions": "Permessi",
         "home":{
             "open": "Apri",
-            "description": "MapStore è sviluppato per creare, salvare e condividere in modo semplice ed intuitivo mappe e mashup creati selezionando contenuti da server come Google Maps, OpenStreetMap, MapQuest o da server specifici forniti dalla propria organizzazione o da terzi. <br/> Visita la <a href=\"/mapstore/docs/\">home page</a> per maggiori dettagli.",
+            "description": "Consorzio LaMMA - Controllo delle stazioni meteo e delle spazializzazioni.",
             "Applications": "Applicazioni",
             "Examples": "Esempi",
             "LinkedinGroup": "Gruppo Linkedin Mapstore",
@@ -127,6 +127,7 @@
             "editMapMetadata":"Modifica Proprietà",
             "mapTypes_combo": "Seleziona il visualizzatore di mappa:",
             "theme_combo": "Seleziona Tema:",
+            "date_picker": "Seleziona una data:",
             "maps_title": "Mappe",
             "locales_combo": "Lingua:"
         },

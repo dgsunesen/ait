@@ -14,6 +14,7 @@ const startApp = () => {
     const ConfigUtils = require('../MapStore2/web/client/utils/ConfigUtils');
 
     const {loadMaps} = require('../MapStore2/web/client/actions/maps');
+    const {loadVersion} = require('../MapStore2/web/client/actions/version');
 
     const StandardApp = require('../MapStore2/web/client/components/app/StandardApp');
 
@@ -26,11 +27,13 @@ const startApp = () => {
 
     const appStore = require('../MapStore2/web/client/stores/StandardStore').bind(null, initialState, {
         home: require('./reducers/home'),
+        maptype: require('../MapStore2/web/client/reducers/maptype'),
         maps: require('../MapStore2/web/client/reducers/maps')
     }, {});
 
     const initialActions = [
-        () => loadMaps(ConfigUtils.getDefaults().geoStoreUrl, ConfigUtils.getDefaults().initialMapFilter || "*")
+        () => loadMaps(ConfigUtils.getDefaults().geoStoreUrl, ConfigUtils.getDefaults().initialMapFilter || "*"),
+        loadVersion
     ];
 
     const appConfig = {

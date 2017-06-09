@@ -6,8 +6,8 @@ var NoEmitOnErrorsPlugin = require("webpack/lib/NoEmitOnErrorsPlugin");
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const assign = require('object-assign');
-const themeEntries = require('./MapStore2/themes.js').themeEntries;
-const extractThemesPlugin = require('./MapStore2/themes.js').extractThemesPlugin;
+const themeEntries = require('./themes.js').themeEntries;
+const extractThemesPlugin = require('./themes.js').extractThemesPlugin;
 module.exports = {
     entry: assign({
         'webpack-dev-server': 'webpack-dev-server/client?http://0.0.0.0:8081', // WebpackDevServer host and port
@@ -126,10 +126,10 @@ module.exports = {
     devServer: {
         proxy: {
             '/mapstore/rest/geostore': {
-                target: "http://dev.mapstore2.geo-solutions.it"
+                target: "http://localhost:8080"
             },
             '/mapstore/proxy': {
-                target: "http://dev.mapstore2.geo-solutions.it"
+                target: "http://localhost:8080"
             }
         }
     },

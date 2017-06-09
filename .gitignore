@@ -5,6 +5,8 @@ target/
 *.sublime-*
 npm-debug.log
 coverage/
+web/libs/Cesium/
+libs/Cesium/
 web/.classpath
 web/.project
 backend/.classpath

@@ -11,10 +11,10 @@ module.exports = {
         MousePositionPlugin: require('../MapStore2/web/client/plugins/MousePosition'),
         PrintPlugin: require('../MapStore2/web/client/plugins/Print'),
         IdentifyPlugin: require('../MapStore2/web/client/plugins/Identify'),
+        IdentifyChartPlugin: require('./plugins/IdentifyChart'),
         TOCPlugin: require('../MapStore2/web/client/plugins/TOC'),
         BackgroundSwitcherPlugin: require('../MapStore2/web/client/plugins/BackgroundSwitcher'),
         MeasurePlugin: require('../MapStore2/web/client/plugins/Measure'),
-        MeasureResultsPlugin: require('../MapStore2/web/client/plugins/MeasureResults'),
         MapPlugin: require('../MapStore2/web/client/plugins/Map'),
         ToolbarPlugin: require('../MapStore2/web/client/plugins/Toolbar'),
         DrawerMenuPlugin: require('../MapStore2/web/client/plugins/DrawerMenu'),
@@ -32,6 +32,7 @@ module.exports = {
         MapLoadingPlugin: require('../MapStore2/web/client/plugins/MapLoading'),
         AboutPlugin: require('./plugins/About'),
         HelpPlugin: require('../MapStore2/web/client/plugins/Help'),
+        HelpLinkPlugin: require('../MapStore2/web/client/plugins/HelpLink'),
         HomePlugin: require('../MapStore2/web/client/plugins/Home'),
         MadeWithLovePlugin: require('./plugins/MadeWithLove'),
         MetadataExplorerPlugin: require('../MapStore2/web/client/plugins/MetadataExplorer'),
@@ -66,7 +67,11 @@ module.exports = {
         TutorialPlugin: require('../MapStore2/web/client/plugins/Tutorial'),
         ThemeSwitcherPlugin: require('../MapStore2/web/client/plugins/ThemeSwitcher'),
         ScrollTopPlugin: require('../MapStore2/web/client/plugins/ScrollTop'),
-        GoFull: require('../MapStore2/web/client/plugins/GoFull')
+        GoFull: require('../MapStore2/web/client/plugins/GoFull'),
+        GlobeViewSwitcherPlugin: require('../MapStore2/web/client/plugins/GlobeViewSwitcher'),
+        BackgroundSelectorPlugin: require('../MapStore2/web/client/plugins/BackgroundSelector'),
+        SearchServicesConfigPlugin: require('../MapStore2/web/client/plugins/SearchServicesConfig'),
+        ChangeDatePlugin: require('./plugins/ChangeDate')
     },
     requires: {
         ReactSwipe: require('react-swipeable-views').default,

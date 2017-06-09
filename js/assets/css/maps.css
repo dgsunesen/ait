@@ -79,6 +79,18 @@ div#mailinglists h1 {
         width: 100%;
     }
 }
+@media (min-width: 769px) {
+    div#mapstore-changedate {
+        width: 300px;
+        margin-left: auto;
+        margin-bottom: 40px;
+    }
+}
+@media (max-width: 768px) {
+    div#mapstore-changedate {
+        width: 100%;
+    }
+}
 
 @media (min-width: 769px) {
      #mapstore-grid-home div.theme-switcher.form-group.form-group-sm {

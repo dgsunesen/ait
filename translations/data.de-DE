@@ -68,7 +68,7 @@
         "permissions": "Genehmigungen",
         "home":{
             "open": "Öffnen",
-            "description": "MapStore 2 wurde entwickelt, um auf einfache und intuitive Weise Karten und Mashups zu erstellen, zu speichern und zu teilen die auf Inhalten von bekannten Quellen wie Google Maps und OpenStreetMap oder von Diensten die auf offenen Protokollen wie OGC WMS, WFS, WMTS or TMS und so weiter basieren.<br/>Besuche die <a href=\"/mapstore/docs/\">Homepage</a> für mehr Details.",
+            "description": "Lamma Consortium - Kontrolle von Wetterstationen und Vermerke.",
             "Applications": "Anwendungen",
             "Examples": "Beispiele",
             "LinkedinGroup": "Mapstore Linkedin Gruppe",
@@ -127,6 +127,7 @@
             "editMapMetadata":"Bearbeite die Eigenschaften der Karte",
             "mapTypes_combo": "Wähle einen Karten-Viewer: ",
             "theme_combo": "Thema wählen:",
+            "date_picker": "Wählen Sie ein Datum aus:",
             "maps_title": "Karten",
             "locales_combo": "Sprache:"
         },
