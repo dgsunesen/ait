@@ -21,6 +21,9 @@
         "enable": "Abilita",
         "layers": "Livelli",
         "warning": "Attenzione",
+        "version": {
+            "label": "Versione"
+        },
         "layerProperties": {
             "windowTitle": "Proprietà del livello",
             "title": "Titolo",
@@ -29,6 +32,9 @@
             "general": "Generale",
             "display": "Visualizzazione",
             "style": "Stile",
+            "transparent": "Trasparenza",
+            "singleTile": "Single Tile",
+            "cached": "Usa la cache",
             "styleCustom": "Usa stile con nome \"{value}\"",
             "styleListLoadError": "Si è verificato un errore durante il caricamento della lista degli stili",
             "stylesRefreshList": "Aggiorna lista degli stili",
@@ -39,6 +45,14 @@
             "confirmDelete": "Sei sicuro?",
             "featureTypeError": "Impossibile caricare gli attributi del layer",
             "elevation": "Elevazione"
+        },
+        "dock": {
+            "row": "{rowsSelected} riga selezionata",
+            "rows": "{rowsSelected} righe selezionate"
+        },
+        "globeswitcher": {
+            "tooltipDeactivate": "Disattiva la modalità 3D",
+            "tooltipActivate": "Attiva la modalità 3D"
         },
         "background": "Sfondo",
         "language": "Lingua",
@@ -68,7 +82,7 @@
         "permissions": "Permessi",
         "home":{
             "open": "Apri",
-            "description": "Consorzio LaMMA - Controllo delle stazioni meteo e delle spazializzazioni.",
+            "description": "Applicazione WebGIS Autorità Idrica Toscana",
             "Applications": "Applicazioni",
             "Examples": "Esempi",
             "LinkedinGroup": "Gruppo Linkedin Mapstore",
@@ -119,6 +133,11 @@
                     "html":"<h3>Raster Styler</h3><p>Crea stile per dati raster</p>"
                 }
             }
+        },
+        "cookiesPolicyNotification": {
+            "title": "Questo sito utilizza cookies",
+            "message": "Continuando a navigare sul sito acconsenti all'uso dei cookie",
+            "confirm": "Acconsento"
         },
         "manager": {
             "openInANewTab":"Apri mappa",
@@ -257,7 +276,32 @@
             "bearingLabel": "Direzione"
         },
         "search":{
-            "placeholder": "Cerca un indirizzo o inserisci coordinate..."
+            "placeholder": "Cerca un indirizzo o inserisci coordinate...",
+            "searchservicesbutton": "Configura servizi di ricerca",
+            "configpaneltitle": "Aggiungi/modifica un servizio di ricerca",
+            "serviceslistlabel": "Servizi disponibili",
+            "overriedservice": "Sovrascrivi servizi",
+            "addbtn": "Aggiungi",
+            "cancelbtn": "Annulla",
+            "confirmremove": "Elimina?",
+            "cancelconfirm": "Sei sicuro?",
+            "nextbtn": "Avanti",
+            "prevbtn": "Precedente",
+            "savebtn": "Salva/Aggiorna",
+            "s_name": "Name",
+            "s_title": "Titolo",
+            "s_description": "Descrizione",
+            "s_priority": "Priorità",
+            "s_url": "Url servizio",
+            "s_layer": "Nome layer",
+            "s_attributes": "Attributi",
+            "s_sort": "Ordina per",
+            "s_max_features": "Max features",
+            "s_wfs_props_label" : "Proprietà WFS service",
+            "s_wfs_opt_props_label" : "Proprietà facoltative",
+            "s_result_props_label": "Proprietà di visualizzazione dei risultati",
+            "s_priority_info": "Usato per oridnare risultati, valori più alti vengono visualizzati per primi. Nominatim ha priorità = 5",
+            "serviceslistempty": "Nessun servizio definito"
         },
         "drawLocal": {
             "draw": {
@@ -447,6 +491,7 @@
                 },
                 "methods": {
                     "zone": "Zona",
+                    "viewport": "Viewport",
                     "box": "BoundingBox",
                     "buffer": "Buffer",
                     "circle": "Cerchio",
@@ -472,8 +517,11 @@
             "retypePwd": "Conferma Password",
             "passwordMinlenght": "La password deve essere lunga almeno {minSize} caratteri",
             "passwordCheckFail": "Le due password non corrispondono",
+            "passwordInvalid": "Password non valida",
             "username": "Username",
             "password": "Password",
+            "passwordChanged": "La password è stata cambiata",
+            "passwordError": "Errore nel cambio della password",
             "signIn":"Accedi",
             "loginFail":"Login Fallito",
             "loginFailedStatusMessages": {
@@ -821,7 +869,7 @@
                 },
                 "home": {
                     "title": "Home",
-                    "text": "Vai alla homepage"
+                    "text": "Clicca per raggiungere la homepage"
                 },
                 "searchButton": {
                     "title": "Ricerca",
@@ -858,6 +906,33 @@
                 "examples": {
                     "title": "Applicazioni personalizzate",
                     "text": "Puoi utilizzare componenti e plugins di MapStore2 per costruire applicazioni personalizzate"
+                },
+                "introCesium": {
+                    "title": "Istruzioni della mappa 3D",
+                    "text": "Premi il pulsante avanti per aprire il tutorial"
+                },
+                "cesium": {
+                    "title": "Interazioni con la mappa",
+                    "pan": "Vista Pan",
+                    "zoom": "Vista Zoom",
+                    "tilt": "Vista Tilt",
+                    "rotate": "Vista Rotazione",
+                    "oneDrag": "Trascina con un dito",
+                    "twoPinch": "Pinch con due dita",
+                    "twoDragSame": "Trascina con due dita nella stessa direzione",
+                    "twoDragOpposite": "Trascina con due dita in direzione opposta",
+                    "leftClick": "Click pulsante sinistro + trascina",
+                    "rightClick": "Click pulsante destro + trascina, o scroll con il pulsante centrale",
+                    "middleClick": "Click pulsante centrale + trascina, o CTRL + Click sinistro/destro + trascina"
+
+                },
+                "cesiumCompass": {
+                    "title": "Bussola",
+                    "text": "Puoi usare la bussola per orbitare intorno al globo. Trascina per ruotare la mappa"
+                },
+                "cesiumNavigation": {
+                    "title": "Navigazione",
+                    "text": "Qui puoi trovare i pulsanti per lo zoom in e out"
                 }
             }
     }

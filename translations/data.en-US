@@ -21,6 +21,9 @@
         "enable": "Enable",
         "layers": "Layers",
         "warning": "Warning",
+        "version": {
+            "label": "Version"
+        },
         "layerProperties": {
             "windowTitle": "Layer Properties",
             "title": "Title",
@@ -29,6 +32,9 @@
             "general": "General",
             "display": "Display",
             "style": "Style",
+            "transparent": "Transparent",
+            "singleTile": "Single Tile",
+            "cached": "Use cache options",
             "styleCustom": "Use style named \"{value}\"",
             "styleListLoadError": "There was an error loading the styles list",
             "stylesRefreshList": "Refresh Styles List",
@@ -39,6 +45,14 @@
             "confirmDelete": "Are you sure?",
             "featureTypeError": "Cannot load layer attributes",
             "elevation": "Elevation"
+        },
+        "dock": {
+            "row": "{rowsSelected} row selected",
+            "rows": "{rowsSelected} rows selected"
+        },
+        "globeswitcher": {
+            "tooltipDeactivate": "Exit 3D Mode",
+            "tooltipActivate": "Enter 3D Mode"
         },
         "background": "Background",
         "language": "Language",
@@ -119,6 +133,11 @@
                     "html":"<h3>Raster Styler</h3><p>Style your raster layer</p>"
                 }
             }
+        },
+        "cookiesPolicyNotification": {
+            "title": "This website uses cookies",
+            "message": "By continuing to use our website you are accepting our use of cookies.",
+            "confirm": "I Agree"
         },
         "manager": {
             "openInANewTab":"Open map",
@@ -257,7 +276,32 @@
             "bearingLabel": "Bearing"
         },
         "search":{
-            "placeholder": "Search by location name or coordinates ..."
+            "placeholder": "Search by location name or coordinates ...",
+            "searchservicesbutton": "Configure search services",
+            "configpaneltitle": "Create/edit a search service",
+            "serviceslistlabel": "Available services",
+            "overriedservice": "Overried default services",
+            "addbtn": "Add",
+            "nextbtn": "Next",
+            "prevbtn": "Back",
+            "savebtn": "Save/Update",
+            "cancelbtn": "Cancel",
+            "confirmremove": "Delete?",
+            "cancelconfirm": "Are you sure?",
+            "s_name": "Name",
+            "s_title": "Title",
+            "s_description": "Description",
+            "s_priority": "Priority",
+            "s_url": "Service url",
+            "s_layer": "Layer",
+            "s_attributes": "Attributes",
+            "s_sort": "Sort by",
+            "s_max_features": "Max features",
+            "s_wfs_props_label" : "WFS service props",
+            "s_wfs_opt_props_label" : "Optional props",
+            "s_result_props_label": "Result display properties",
+            "s_priority_info": "Used to sort search results, higher values first. Nominatim results have priority = 5",
+            "serviceslistempty": "No custom services defined"
         },
         "drawLocal": {
             "draw": {
@@ -447,6 +491,7 @@
                 },
                 "methods": {
                     "zone": "Zone",
+                    "viewport": "Viewport",
                     "box": "BoundingBox",
                     "buffer": "Buffer",
                     "circle": "Circle",
@@ -472,8 +517,11 @@
             "retypePwd": "Retype Password",
             "passwordMinlenght": "Your password must be at least {minSize} character",
             "passwordCheckFail": "Passwords do not match!",
+            "passwordInvalid": "Invalid password",
             "username": "Username",
             "password": "Password",
+            "passwordChanged": "Password changed",
+            "passwordError": "Error changing password",
             "signIn":"Sign-in",
             "loginFail":"Login Fail",
             "loginFailedStatusMessages": {
@@ -821,7 +869,7 @@
             },
             "home": {
                 "title": "Home",
-                "text": "Go to homepage"
+                "text": "Click to go to homepage"
             },
             "searchButton": {
                 "title": "Search",
@@ -858,6 +906,33 @@
             "examples": {
                 "title": "Custom Application",
                 "text": "You can use components and plugins of MapStore2 to build custom applications"
+            },
+            "introCesium": {
+                "title": "3D map instructions",
+                "text": "Click on next button to start the tutorial"
+            },
+            "cesium": {
+                "title": "Interactions with the Map",
+                "pan": "Pan view",
+                "zoom": "Zoom view",
+                "tilt": "Tilt view",
+                "rotate": "Rotate view",
+                "oneDrag": "One finger drag",
+                "twoPinch": "Two finger pinch",
+                "twoDragSame": "Two finger drag, same direction",
+                "twoDragOpposite": "Two finger drag, opposite direction",
+                "leftClick": "Left click + drag",
+                "rightClick": "Right click + drag, or Mouse wheel scroll",
+                "middleClick": "Middle click + drag, or CTRL + Left/Right click + drag"
+
+            },
+            "cesiumCompass": {
+                "title": "Compass",
+                "text": "You can use the compass to orbit around the globe. Drag to rotate the map"
+            },
+            "cesiumNavigation": {
+                "title": "Navigation",
+                "text": "Here you can find the zoom in and zoom out buttons"
             }
         }
     }
