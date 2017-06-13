@@ -6,21 +6,28 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var {MAP_TYPE_CHANGED, MAP_DATE_CHANGED, MAP_DATE_PLUS, MAP_DATE_MINUS} = require('../actions/home');
+const moment = require('moment');
+var {MAP_DATE_CHANGED, MAP_DATE_PLUS, MAP_DATE_MINUS} = require('../actions/home');
 
-function home(state = {mapType: "leaflet", date: new Date("1995-01-01")}, action) {
+function home(state = {date: new Date("1995-01-01"), plusButtonDisabled: false, minusButtonDisabled: false}, action) {
     switch (action.type) {
-        case MAP_TYPE_CHANGED:
-            return {mapType: action.mapType};
         case MAP_DATE_CHANGED:
-            return {date: action.date};
+            return {
+                date: action.date,
+                plusButtonDisabled: moment(action.date).format('YYYY-MM-DD') === moment().subtract(1, 'day').format('YYYY-MM-DD'),
+                minusButtonDisabled: moment(action.date).format('YYYY-MM-DD') === moment("1995-01-01").format('YYYY-MM-DD')
+            };
         case MAP_DATE_PLUS:
             return {
-                date: new Date(action.date.getTime() + 86400000)
+                date: new Date(action.date.getTime() + 86400000),
+                plusButtonDisabled: moment(action.date).add(1, 'day').format('YYYY-MM-DD') === moment().subtract(1, 'day').format('YYYY-MM-DD'),
+                minusButtonDisabled: false
             };
         case MAP_DATE_MINUS:
             return {
-                date: new Date(action.date.getTime() - 86400000)
+                date: new Date(action.date.getTime() - 86400000),
+                plusButtonDisabled: false,
+                minusButtonDisabled: moment(action.date).subtract(1, 'day').format('YYYY-MM-DD') === moment("1995-01-01").format('YYYY-MM-DD')
             };
         default:
             return state;

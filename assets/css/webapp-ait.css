@@ -1,7 +1,39 @@
 .mapstore-header {
-    background-image: url('../img/lamma_spazz_header.jpg') !important;
+    /*background-image: url('../img/lamma_spazz_header.jpg') !important;*/
+    background-color: #007BB3;
     top: 27px !important;
-    height: 150px !important;
+    height: 60px !important;
+}
+
+.mapstore-home-description {
+    margin-top: 50px !important;
+    margin-bottom: 30px !important;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px ) {
+    .mapstore-home-description {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .mapstore-home-description {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .mapstore-home-description {
+        margin-left: 300px;
+        margin-right: 300px;
+    }
+
 }
 
 .customer-logo {
@@ -17,21 +49,21 @@
 }
 
 #mapstore-changedate {
-    margin-top: 50px;
+    margin-top: 0px;
 }
 
-#mapstore-changedate-map .center .input-group-btn:last-child > .btn, .db_meteo .input-group-btn:last-child > .btn-group {
+#mapstore-changedate-map .center .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
     margin-left: 10px;
 }
 
-#mapstore-changedate-map .center .input-group-btn:first-child > .btn, .db_meteo .input-group-btn:first-child > .btn-group {
+#mapstore-changedate-map .center .input-group-btn:first-child > .btn, .input-group-btn:first-child > .btn-group {
     margin-right: 10px;
 }
 
-#mapstore-changedate .center .input-group-btn:last-child > .btn, .db_meteo .input-group-btn:last-child > .btn-group {
+#mapstore-changedate .center .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
     margin-left: 10px;
 }
 
-#mapstore-changedate .center .input-group-btn:first-child > .btn, .db_meteo .input-group-btn:first-child > .btn-group {
+#mapstore-changedate .center .input-group-btn:first-child > .btn, .input-group-btn:first-child > .btn-group {
     margin-right: 10px;
 }

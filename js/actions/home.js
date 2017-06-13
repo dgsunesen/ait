@@ -6,17 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const MAP_TYPE_CHANGED = 'MAP_TYPE_CHANGED';
 const MAP_DATE_CHANGED = 'MAP_DATE_CHANGED';
 const MAP_DATE_PLUS = 'MAP_DATE_PLUS';
 const MAP_DATE_MINUS = 'MAP_DATE_MINUS';
-
-function changeMapType(mapType) {
-    return {
-        type: MAP_TYPE_CHANGED,
-        mapType
-    };
-}
 
 function changeDate(date) {
     return {
@@ -39,4 +31,4 @@ function changeDateMinus(date) {
     };
 }
 
-module.exports = {MAP_TYPE_CHANGED, MAP_DATE_CHANGED, MAP_DATE_PLUS, MAP_DATE_MINUS, changeMapType, changeDate, changeDatePlus, changeDateMinus};
+module.exports = {MAP_DATE_CHANGED, MAP_DATE_PLUS, MAP_DATE_MINUS, changeDate, changeDatePlus, changeDateMinus};

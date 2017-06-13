@@ -15,7 +15,7 @@ const url = require('url');
 const urlQuery = url.parse(window.location.href, true).query;
 
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
-const {loadMapConfig} = require('../../MapStore2/web/client/actions/config');
+const {loadMapConfig} = require('../actions/config');
 const {resetControls} = require('../../MapStore2/web/client/actions/controls');
 
 const MapViewer = require('../../MapStore2/web/client/containers/MapViewer');

@@ -6,6 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+const moment = require('moment');
+
 module.exports = {
     pages: [{
         name: "home",
@@ -32,6 +34,7 @@ module.exports = {
     initialState: {
         defaultState: {
             mousePosition: {enabled: false},
+            home: {date: moment().subtract(1, 'day')._d, minusButtonDisabled: false, plusButtonDisabled: true},
             maptype: {mapType: "openlayers"},
             mapInfo: {enabled: false, infoFormat: 'application/json' },
             mapInfoChart: {enabled: false, infoFormat: 'application/json' },

@@ -22,6 +22,8 @@ const ChangeDate = React.createClass({
         id: React.PropTypes.string,
         className: React.PropTypes.object,
         date: React.PropTypes.instanceOf(Date),
+        plusButtonDisabled: React.PropTypes.bool,
+        minusButtonDisabled: React.PropTypes.bool,
         onChangeDate: React.PropTypes.func,
         onChangeDateMinus: React.PropTypes.func,
         onChangeDatePlus: React.PropTypes.func,
@@ -33,15 +35,19 @@ const ChangeDate = React.createClass({
     getDefaultProps() {
         return {
             date: new Date('1995-01-01'),
+            plusButtonDisabled: false,
+            minusButtonDisabled: false,
             onChangeDate: () => {},
             onUpdateSettings: () => {},
             onChangeDateMinus: () => {},
             onChangeDatePlus: () => {}
         };
     },
-    componentDidUpdate(prevProps) {
-        if (this.props.date.getTime() !== prevProps.date.getTime()) {
-            this.updateParams({params: {data: moment(this.props.date).format('YYYY-MM-DD'), map: "spazializzazioni"}});
+    componentWillReceiveProps(nextProps) {
+        if (this.props.id === "mapstore-changedate-map") {
+            if (this.props.date.getTime() !== nextProps.date.getTime()) {
+                this.updateParams({params: {data: moment(nextProps.date).format('YYYY-MM-DD'), map: "spazializzazioni"}});
+            }
         }
     },
     render() {
@@ -54,13 +60,16 @@ const ChangeDate = React.createClass({
                         <span className="input-group-btn">
                             <Button
                                 onClick={() => this.props.onChangeDateMinus(new Date(this.props.date))}
-                                bsStyle="danger">
+                                bsStyle="danger"
+                                disabled={this.props.minusButtonDisabled}>
                                 <Glyphicon glyph="glyphicon glyphicon-minus" />
                             </Button>
                         </span>
 
                         <DateTimePicker
                         time={false}
+                        min={new Date("1995-01-01")}
+                        max={moment().subtract(1, 'day')._d}
                         format={"YYYY-MM-DD"}
                         value={new Date(this.props.date)}
                         onChange={this.props.onChangeDate}/>
@@ -68,7 +77,8 @@ const ChangeDate = React.createClass({
                         <span className="input-group-btn">
                             <Button
                                 onClick={() => this.props.onChangeDatePlus(new Date(this.props.date))}
-                                bsStyle="success">
+                                bsStyle="success"
+                                disabled={this.props.plusButtonDisabled}>
                                 <Glyphicon glyph="glyphicon glyphicon-plus" />
                             </Button>
                         </span>
@@ -102,6 +112,8 @@ const ChangeDate = React.createClass({
 
 const ChangeDatePlugin = connect((state) => ({
     date: state.home && state.home.date || new Date('1995-01-01'),
+    plusButtonDisabled: state.home && state.home.plusButtonDisabled || false,
+    minusButtonDisabled: state.home && state.home.minusButtonDisabled || false,
     settings: state.layers && state.layers.settings || {expanded: false, options: {opacity: 1}},
     layers: state.layers || {}
 }), {
