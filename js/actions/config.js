@@ -28,13 +28,15 @@ function configureError(e) {
     };
 }
 
-function loadMapConfig(configName, mapId, date) {
+function loadMapConfig(configName, mapId, fromData, toData) {
     return (dispatch) => {
         return axios.get(configName).then((response) => {
             if (typeof response.data === 'object') {
                 response.data.map.layers.map((data) => {
-                    if (data && data.params && data.params.map === "spazializzazioni") {
-                        Object.assign(data, {params: {data: moment(date).format('YYYY-MM-DD'), map: "spazializzazioni"}});
+                    // if (data && data.params && data.params.map === "spazializzazioni") {
+                    if (data && data.group && (data.group === "Variabili Meteo.Pioggia" || data.group === "Variabili Meteo.Temperatura" || data.group === "Layer di Base")) {
+                        // Object.assign(data, {params: {data: moment(date).format('YYYY-MM-DD'), map: "spazializzazioni"}});
+                        Object.assign(data, {params: {fromData: moment(fromData).format('YYYY-MM-DD'), toData: moment(toData).format('YYYY-MM-DD')}});
                     }
                 }, this);
                 dispatch(configureMap(response.data, mapId));

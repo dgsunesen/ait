@@ -1,6 +1,11 @@
     {
     "locale": "it-IT",
     "messages": {
+        "aitapp": {
+            "selectDateHidrologicYear": "Seleziona una data:",
+            "selectCumulativeStartMonth": "Seleziona Mese:",
+            "selectCumulativePeriod": "Seleziona periodo di cumulata dalla data selezionata:"
+        },
         "Language": "Lingua",
         "msgId0": "{name} ha scattato {numPhotos, plural, =0 {nessuna foto} other {# foto}} il {takenDate, date, long}.",
         "htmlTest": "{name} {surname}",

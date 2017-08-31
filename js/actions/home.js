@@ -6,29 +6,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const MAP_DATE_CHANGED = 'MAP_DATE_CHANGED';
-const MAP_DATE_PLUS = 'MAP_DATE_PLUS';
-const MAP_DATE_MINUS = 'MAP_DATE_MINUS';
+const MAP_YEAR_CHANGED = 'MAP_YEAR_CHANGED';
+const MAP_PERIOD_CHANGED = 'MAP_PERIOD_CHANGED';
 
-function changeDate(date) {
+function changeYear(hidrologicYear) {
     return {
-        type: MAP_DATE_CHANGED,
-        date
+        type: MAP_YEAR_CHANGED,
+        hidrologicYear
     };
 }
 
-function changeDatePlus(date) {
+function changePeriod(periodType) {
     return {
-        type: MAP_DATE_PLUS,
-        date
+        type: MAP_PERIOD_CHANGED,
+        periodType
     };
 }
 
-function changeDateMinus(date) {
-    return {
-        type: MAP_DATE_MINUS,
-        date
-    };
-}
 
-module.exports = {MAP_DATE_CHANGED, MAP_DATE_PLUS, MAP_DATE_MINUS, changeDate, changeDatePlus, changeDateMinus};
+module.exports = {MAP_YEAR_CHANGED, MAP_PERIOD_CHANGED, changeYear, changePeriod};

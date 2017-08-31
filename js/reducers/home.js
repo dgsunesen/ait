@@ -6,28 +6,28 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const moment = require('moment');
-var {MAP_DATE_CHANGED, MAP_DATE_PLUS, MAP_DATE_MINUS} = require('../actions/home');
+var {MAP_YEAR_CHANGED, MAP_PERIOD_CHANGED} = require('../actions/home');
+const DateAPI = require('../utils/ManageDateUtils');
 
-function home(state = {date: new Date("1995-01-01"), plusButtonDisabled: false, minusButtonDisabled: false}, action) {
+const defaultState = {
+    periodType: "1",
+    fromData: new Date(DateAPI.calculateDateFromKey("1").fromData),
+    toData: new Date(DateAPI.calculateDateFromKey("1").toData)
+};
+
+function home(state = defaultState, action) {
     switch (action.type) {
-        case MAP_DATE_CHANGED:
+        case MAP_YEAR_CHANGED:
             return {
-                date: action.date,
-                plusButtonDisabled: moment(action.date).format('YYYY-MM-DD') === moment().subtract(1, 'day').format('YYYY-MM-DD'),
-                minusButtonDisabled: moment(action.date).format('YYYY-MM-DD') === moment("1995-01-01").format('YYYY-MM-DD')
+                fromData: new Date(DateAPI.calculateDateFromKey(state.periodType, action.hidrologicYear).fromData),
+                toData: new Date(DateAPI.calculateDateFromKey(state.periodType, action.hidrologicYear).toData),
+                periodType: state.periodType
             };
-        case MAP_DATE_PLUS:
+        case MAP_PERIOD_CHANGED:
             return {
-                date: new Date(action.date.getTime() + 86400000),
-                plusButtonDisabled: moment(action.date).add(1, 'day').format('YYYY-MM-DD') === moment().subtract(1, 'day').format('YYYY-MM-DD'),
-                minusButtonDisabled: false
-            };
-        case MAP_DATE_MINUS:
-            return {
-                date: new Date(action.date.getTime() - 86400000),
-                plusButtonDisabled: false,
-                minusButtonDisabled: moment(action.date).subtract(1, 'day').format('YYYY-MM-DD') === moment("1995-01-01").format('YYYY-MM-DD')
+                fromData: new Date(DateAPI.calculateDateFromKey(action.periodType, state.toData).fromData),
+                toData: new Date(DateAPI.calculateDateFromKey(action.periodType, state.toData).toData),
+                periodType: action.periodType
             };
         default:
             return state;

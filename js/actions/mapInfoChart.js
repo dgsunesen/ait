@@ -9,7 +9,8 @@
 const assign = require('object-assign');
 const axios = require('axios');
 const uuid = require('uuid');
-const GeoCodingApi = require('../../MapStore2/web/client/api/Nominatim');
+// const GeoCodingApi = require('../../MapStore2/web/client/api/Nominatim');
+const AITApi = require('../api/AITApi');
 
 const LOAD_FEATURE_INFO = 'LOAD_FEATURE_INFO';
 const ERROR_FEATURE_INFO = 'ERROR_FEATURE_INFO';
@@ -20,7 +21,7 @@ const PURGE_MAPINFO_RESULTS = 'PURGE_MAPINFO_RESULTS';
 const CHANGE_MAPINFO_FORMAT = 'CHANGE_MAPINFO_FORMAT';
 const SHOW_MAPINFO_MARKER = 'SHOW_MAPINFO_MARKER';
 const HIDE_MAPINFO_MARKER = 'HIDE_MAPINFO_MARKER';
-const SHOW_REVERSE_GEOCODE = 'SHOW_REVERSE_GEOCODE';
+const SHOW_AIT_CHART = 'SHOW_AIT_CHART';
 const HIDE_REVERSE_GEOCODE = 'HIDE_REVERSE_GEOCODE';
 const GET_VECTOR_INFO = 'GET_VECTOR_INFO';
 const NO_QUERYABLE_LAYERS = 'NO_QUERYABLE_LAYERS';
@@ -177,14 +178,16 @@ function hideMapinfoMarker() {
 
 function revGeocodeInfo(results) {
     return {
-        type: SHOW_REVERSE_GEOCODE,
-        reverseGeocodeData: results.data
+        type: SHOW_AIT_CHART,
+        chartsData: results.data
     };
 }
 
-function showMapinfoRevGeocode(latlng) {
+function showChart(latlng, data) {
+    // const reqId = uuid.v1();
     return (dispatch) => {
-        GeoCodingApi.reverseGeocode(latlng).then((response) => {
+        // dispatch(newMapInfoRequest(reqId, {}));
+        AITApi.aitchart(latlng, data).then((response) => {
             dispatch(revGeocodeInfo(response));
         }).catch((e) => {
             dispatch(revGeocodeInfo(e));
@@ -208,7 +211,7 @@ module.exports = {
     CHANGE_MAPINFO_FORMAT,
     SHOW_MAPINFO_MARKER,
     HIDE_MAPINFO_MARKER,
-    SHOW_REVERSE_GEOCODE,
+    SHOW_AIT_CHART,
     HIDE_REVERSE_GEOCODE,
     GET_VECTOR_INFO,
     NO_QUERYABLE_LAYERS,
@@ -222,7 +225,7 @@ module.exports = {
     hideMapinfoMarker,
     revGeocodeInfo,
     hideMapinfoRevGeocode,
-    showMapinfoRevGeocode,
+    showChart,
     getVectorInfo,
     noQueryableLayers,
     clearWarning

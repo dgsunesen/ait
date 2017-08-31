@@ -144,7 +144,7 @@
                 "name": "IdentifyChart",
                 "showIn": ["IdentifyBar"],
                 "cfg": {
-                  "enableRevGeocode": false,
+                  "enableRevGeocode": true,
                     "viewerOptions": {
                         "container": "{context.ReactSwipe}",
                         "header": "{context.SwipeHeader}",
@@ -232,7 +232,7 @@
             },
             "OmniBar", "Login", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "FullScreen", "GlobeViewSwitcher", "SearchServicesConfig",
             {
-              "name": "ChangeDate",
+              "name": "ChangePeriodAit",
               "cfg" : {
                 "id": "mapstore-changedate-map"
               }
@@ -332,17 +332,13 @@
                 "className": "navbar shadow navbar-home"
             }
         }, "Login", "ManagerMenu", "ScrollTop", "Attribution"],
-        "maps": ["Header", "HomeDescription", "GridContainer", "CreateNewMap",
+        "maps": ["Header", "GridContainer", "CreateNewMap",
           {
             "name": "Maps",
             "cfg" :{
               "colProps": {
                     "xs": 6,
                     "sm": 6,
-                    "lg": 6,
-                    "md": 6,
-                    "mdOffset": 3,
-                    "lgOffset": 3,
                     "smOffset": 3,
                     "xsOffset": 3,
                     "style": {
@@ -351,13 +347,15 @@
                 }
             }
           },
-          "Footer",
         {
-          "name": "ChangeDate",
+          "name": "HomeMapsAit"
+        },
+        {
+          "name": "ChangePeriodAit",
           "cfg" : {
             "id": "mapstore-changedate"
           }
-        }],
+        },"Footer"],
         "manager": ["Header", "Redirect", "Manager", "Home", "UserManager", "GroupManager", "Footer"]
     }
 }

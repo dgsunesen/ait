@@ -46,7 +46,8 @@ const ChangeDate = React.createClass({
     componentWillReceiveProps(nextProps) {
         if (this.props.id === "mapstore-changedate-map") {
             if (this.props.date.getTime() !== nextProps.date.getTime()) {
-                this.updateParams({params: {data: moment(nextProps.date).format('YYYY-MM-DD'), map: "spazializzazioni"}});
+                this.updateParams({params: {data: moment(nextProps.date).format('YYYY-MM-DD')}});
+                // this.updateParams({params: {data: moment(nextProps.date).format('YYYY-MM-DD'), map: "spazializzazioni"}});
             }
         }
     },
@@ -98,7 +99,8 @@ const ChangeDate = React.createClass({
         this.props.onUpdateSettings(newParams);
         if (onUpdateNode) {
             this.props.layers.flat.map((layers) => {
-                if (layers.group === "Spazializzazioni" || layers.group === "Aree di allerta meteo" || layers.group === "Stazioni") {
+                if (layers.group === "Variabili Meteo.Pioggia" || layers.group === "Variabili Meteo.Temperatura" || layers.group === "Layer di Base") {
+                // if (layers.group === "Spazializzazioni" || layers.group === "Aree di allerta meteo" || layers.group === "Stazioni") {
                     this.props.onUpdateNode(
                         layers.id,
                         "layers",

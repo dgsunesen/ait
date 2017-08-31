@@ -18,12 +18,12 @@ const {
     CHANGE_MAPINFO_FORMAT,
     SHOW_MAPINFO_MARKER,
     HIDE_MAPINFO_MARKER,
-    SHOW_REVERSE_GEOCODE,
+    SHOW_AIT_CHART,
     HIDE_REVERSE_GEOCODE,
     GET_VECTOR_INFO,
     NO_QUERYABLE_LAYERS,
     CLEAR_WARNING
-} = require('../../MapStore2/web/client/actions/mapInfo');
+} = require('../actions/mapInfoChart');
 
 const {RESET_CONTROLS} = require('../../MapStore2/web/client/actions/controls');
 
@@ -69,7 +69,8 @@ function mapInfoChart(state = {}, action) {
         case PURGE_MAPINFO_RESULTS:
             return assign({}, state, {
                 responses: [],
-                requests: []
+                requests: [],
+                chartsData: []
             });
         case LOAD_FEATURE_INFO: {
             return receiveResponse(state, action, 'data');
@@ -100,23 +101,23 @@ function mapInfoChart(state = {}, action) {
                 showMarker: false
             });
         }
-        case SHOW_REVERSE_GEOCODE: {
+        case SHOW_AIT_CHART: {
             return assign({}, state, {
-                showModalReverse: true,
-                reverseGeocodeData: action.reverseGeocodeData
+                chartsData: action.chartsData
             });
         }
         case HIDE_REVERSE_GEOCODE: {
             return assign({}, state, {
                 showModalReverse: false,
-                reverseGeocodeData: undefined
+                chartsData: undefined
             });
         }
         case RESET_CONTROLS: {
             return assign({}, state, {
                 showMarker: false,
                 responses: [],
-                requests: []
+                requests: [],
+                chartsData: []
             });
         }
         case GET_VECTOR_INFO: {

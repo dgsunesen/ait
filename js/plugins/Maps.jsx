@@ -8,18 +8,16 @@
 
 const React = require('react');
 const {connect} = require('react-redux');
-const {loadMaps, updateMapMetadata, deleteMap, createThumbnail, deleteThumbnail, saveMap, thumbnailError, saveAll, onDisplayMetadataEdit, resetUpdating} = require('../../MapStore2/web/client/actions/maps');
+const {loadMaps, updateMapMetadata, deleteMap, createThumbnail, deleteThumbnail, saveMap, thumbnailError, saveAll, onDisplayMetadataEdit, resetUpdating, metadataChanged} = require('../../MapStore2/web/client/actions/maps');
 const {editMap, updateCurrentMap, errorCurrentMap, removeThumbnail, resetCurrentMap} = require('../../MapStore2/web/client/actions/currentMap');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
-const moment = require('moment');
 const MapsGrid = connect((state) => {
     return {
         bsSize: "small",
         maps: state.maps && state.maps.results ? state.maps.results : [],
         currentMap: state.currentMap,
         loading: state.maps && state.maps.loading,
-        mapType: (state.home && state.home.mapType) || (state.maps && state.maps.mapType),
-        date: state.home && state.home.date || (state.maps && state.maps.date) || new Date('1995-01-01')
+        mapType: (state.home && state.home.mapType) || (state.maps && state.maps.mapType)
     };
 }, {
     loadMaps,
@@ -45,13 +43,14 @@ const {setControlProperty} = require('../../MapStore2/web/client/actions/control
 
 const MetadataModal = connect(
     (state = {}) => ({
+        metadata: state.maps.metadata,
         availableGroups: state.currentMap && state.currentMap.availableGroups || [ ], // TODO: add message when array is empty
         newGroup: state.controls && state.controls.permissionEditor && state.controls.permissionEditor.newGroup,
         newPermission: state.controls && state.controls.permissionEditor && state.controls.permissionEditor.newPermission || "canRead",
         user: state.security && state.security.user || {name: "Guest"}
     }),
     {
-        loadPermissions, loadAvailableGroups, updatePermissions, onGroupsChange: updateCurrentMapPermissions, onAddPermission: addCurrentMapPermission,
+        loadPermissions, loadAvailableGroups, updatePermissions, onGroupsChange: updateCurrentMapPermissions, onAddPermission: addCurrentMapPermission, metadataChanged,
         onNewGroupChoose: setControlProperty.bind(null, 'permissionEditor', 'newGroup'),
         onNewPermissionChoose: setControlProperty.bind(null, 'permissionEditor', 'newPermission')
     }, null, {withRef: true} )(require('../../MapStore2/web/client/components/maps/modals/MetadataModal'));
@@ -86,7 +85,6 @@ const PaginationToolbar = connect((state) => {
 const Maps = React.createClass({
     propTypes: {
         mapType: React.PropTypes.string,
-        date: React.PropTypes.instanceOf(Date),
         onGoToMap: React.PropTypes.func,
         loadMaps: React.PropTypes.func,
         maps: React.PropTypes.object,
@@ -101,7 +99,6 @@ const Maps = React.createClass({
     getDefaultProps() {
         return {
             mapType: "leaflet",
-            date: new Date("1995-01-01"),
             onGoToMap: () => {},
             loadMaps: () => {},
             fluid: false,
@@ -122,8 +119,7 @@ const Maps = React.createClass({
     render() {
         return (<MapsGrid
             colProps={this.props.colProps}
-            viewerUrl={(map) => {this.context.router.push("/viewer/" + this.props.mapType + "/" + map.id + "/" + moment(this.props.date).format('YYYY-MM-DD')); }}
-            bottom={<PaginationToolbar />}
+            viewerUrl={(map) => {this.context.router.push("/viewer/" + this.props.mapType + "/" + map.id); }}
             metadataModal={MetadataModal}
             />);
     }
@@ -131,13 +127,14 @@ const Maps = React.createClass({
 
 module.exports = {
     MapsPlugin: connect((state) => ({
-        mapType: state.home && state.home.mapType || (state.maps && state.maps.mapType) || 'leaflet',
-        date: state.home && state.home.date || (state.maps && state.maps.date) || new Date('1995-01-01')
+        mapType: (state.maptype && state.maptype.mapType) || 'leaflet'
     }), {
         loadMaps
     })(Maps),
+    epics: require('../../MapStore2/web/client/epics/maptype'),
     reducers: {
         maps: require('../../MapStore2/web/client/reducers/maps'),
+        maptype: require('../../MapStore2/web/client/reducers/maptype'),
         currentMap: require('../../MapStore2/web/client/reducers/currentMap')
     }
 };

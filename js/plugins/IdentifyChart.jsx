@@ -13,7 +13,7 @@ const {createSelector} = require('reselect');
 const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
 const {layersSelector} = require('../../MapStore2/web/client/selectors/layers');
 
-const {getFeatureInfo, getVectorInfo, purgeMapInfoResults, showMapinfoMarker, hideMapinfoMarker, showMapinfoRevGeocode, hideMapinfoRevGeocode, noQueryableLayers, clearWarning} = require('../actions/mapInfoChart');
+const {purgeMapInfoResults, showMapinfoMarker, hideMapinfoMarker, showChart, hideMapinfoRevGeocode, clearWarning} = require('../actions/mapInfoChart');
 const {changeMousePointer} = require('../../MapStore2/web/client/actions/map');
 
 const Message = require('../../MapStore2/web/client/plugins/locale/Message');
@@ -32,12 +32,12 @@ const selector = createSelector([
     mapSelector,
     layersSelector,
     (state) => state.mapInfoChart && state.mapInfoChart.clickPoint,
-    (state) => state.mapInfoChart && state.mapInfoChart.showModalReverse,
-    (state) => state.mapInfoChart && state.mapInfoChart.reverseGeocodeData,
+    (state) => state.home && state.home.date,
+    (state) => state.mapInfoChart && state.mapInfoChart.chartsData,
     (state) => state.mapInfoChart && state.mapInfoChart.warning
 
-], (enabled, responses, requests, format, map, layers, point, showModalReverse, reverseGeocodeData, warning) => ({
-    enabled, responses, requests, format, map, layers, point, showModalReverse, reverseGeocodeData, warning
+], (enabled, responses, requests, format, map, layers, point, data, chartsData, warning) => ({
+    enabled, responses, requests, format, map, layers, point, data, chartsData, warning
 }));
 // result panel
 
@@ -84,15 +84,12 @@ const selector = createSelector([
  * }
  */
 const IdentifyChartPlugin = connect(selector, {
-    sendRequest: getFeatureInfo,
-    localRequest: getVectorInfo,
     purgeResults: purgeMapInfoResults,
     changeMousePointer,
     showMarker: showMapinfoMarker,
-    noQueryableLayers,
     clearWarning,
     hideMarker: hideMapinfoMarker,
-    showRevGeocode: showMapinfoRevGeocode,
+    showAitChart: showChart,
     hideRevGeocode: hideMapinfoRevGeocode
 })(require('../components/data/identify/IdentifyChartPanel'));
 

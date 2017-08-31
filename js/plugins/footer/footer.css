@@ -1,13 +1,8 @@
 .ms-footer{
-    background-color: #000000;
-    margin-top: 50px;
-    padding-top: 30px;
+    background-color: #4E791E;
+    margin-top: 20px;
+    padding-top: 20px;
     text-align: center;
     color: #FFFFFF !important;
-    margin-bottom: 0px !important;
-    border-top: 1px solid #000000;
-}
-
-.ms-footer img{
-    width: 400px;
+    border-top: 1px solid #4E791E;
 }

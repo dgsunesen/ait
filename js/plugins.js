@@ -38,11 +38,11 @@ module.exports = {
         MetadataExplorerPlugin: require('../MapStore2/web/client/plugins/MetadataExplorer'),
         LoginPlugin: require('../MapStore2/web/client/plugins/Login'),
         OmniBarPlugin: require('../MapStore2/web/client/plugins/OmniBar'),
-        GridContainerPlugin: require('../MapStore2/web/client/plugins/GridContainer'),
+        GridContainerPlugin: require('./plugins/GridContainer'),
         BurgerMenuPlugin: require('../MapStore2/web/client/plugins/BurgerMenu'),
         UndoPlugin: require('../MapStore2/web/client/plugins/History'),
         RedoPlugin: require('../MapStore2/web/client/plugins/History'),
-        MapsPlugin: require('../MapStore2/web/client/plugins/Maps'),
+        MapsPlugin: require('./plugins/Maps'),
         MapSearchPlugin: require('../MapStore2/web/client/plugins/MapSearch'),
         HomeDescriptionPlugin: require('./plugins/HomeDescription'),
         ExamplesPlugin: require('./plugins/Examples'),
@@ -71,7 +71,9 @@ module.exports = {
         GlobeViewSwitcherPlugin: require('../MapStore2/web/client/plugins/GlobeViewSwitcher'),
         BackgroundSelectorPlugin: require('../MapStore2/web/client/plugins/BackgroundSelector'),
         SearchServicesConfigPlugin: require('../MapStore2/web/client/plugins/SearchServicesConfig'),
-        ChangeDatePlugin: require('./plugins/ChangeDate')
+        // ChangeDatePlugin: require('./plugins/ChangeDate'),
+        HomeMapsAitPlugin: require('./plugins/HomeMapsAit'),
+        ChangePeriodAitPlugin: require('./plugins/ChangePeriodAit')
     },
     requires: {
         ReactSwipe: require('react-swipeable-views').default,

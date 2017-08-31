@@ -30,7 +30,8 @@ const MapViewerPage = React.createClass({
         reset: React.PropTypes.func,
         plugins: React.PropTypes.object,
         location: React.PropTypes.object,
-        date: React.PropTypes.instanceOf(Date)
+        fromData: React.PropTypes.instanceOf(Date),
+        toData: React.PropTypes.instanceOf(Date)
     },
     getDefaultProps() {
         return {
@@ -39,7 +40,8 @@ const MapViewerPage = React.createClass({
     },
     componentWillMount() {
         if (this.props.params.mapId && oldLocation !== this.props.location) {
-            let date = this.props.date;
+            let fromData = this.props.fromData;
+            let toData = this.props.toData;
             oldLocation = this.props.location;
             if (!ConfigUtils.getDefaults().ignoreMobileCss) {
                 if (this.props.mode === 'mobile') {
@@ -63,7 +65,7 @@ const MapViewerPage = React.createClass({
             }
             const {configUrl} = ConfigUtils.getConfigurationOptions({mapId, config});
             this.props.reset();
-            this.props.loadMapConfig(configUrl, mapId, date);
+            this.props.loadMapConfig(configUrl, mapId, fromData, toData);
         }
     },
     render() {
@@ -76,7 +78,8 @@ const MapViewerPage = React.createClass({
 
 module.exports = connect((state) => ({
     mode: (urlQuery.mobile || (state.browser && state.browser.mobile)) ? 'mobile' : 'desktop',
-    date: state.home && state.home.date || (state.maps && state.maps.date) || new Date('1995-01-01')
+    fromData: state.home && state.home.fromData || new Date('1995-01-01'),
+    toData: state.home && state.home.toData || new Date('1995-01-01')
 }),
 {
     loadMapConfig,

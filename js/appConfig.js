@@ -6,6 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+const DateAPI = require('./utils/ManageDateUtils');
 const moment = require('moment');
 
 module.exports = {
@@ -34,10 +35,15 @@ module.exports = {
     initialState: {
         defaultState: {
             mousePosition: {enabled: false},
-            home: {date: moment().subtract(1, 'day')._d, minusButtonDisabled: false, plusButtonDisabled: true},
+            // home: {date: moment().subtract(1, 'day')._d, minusButtonDisabled: false, plusButtonDisabled: true},
+            home: {
+                fromData: new Date(DateAPI.calculateDateFromKey("1", moment().subtract(1, 'day')._d).fromData),
+                toData: new Date(DateAPI.calculateDateFromKey("1", moment().subtract(1, 'day')._d).toData),
+                periodType: "1"
+            },
             maptype: {mapType: "openlayers"},
-            mapInfo: {enabled: false, infoFormat: 'application/json' },
-            mapInfoChart: {enabled: false, infoFormat: 'application/json' },
+            mapInfo: {enabled: false, infoFormat: 'text/html' },
+            mapInfoChart: {enabled: false, infoFormat: 'text/html' },
             theme: {selectedTheme: {id: "ait"}},
             controls: {
                 help: {

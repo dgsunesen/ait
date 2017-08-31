@@ -10,16 +10,16 @@ const React = require('react');
 const {Panel, Glyphicon, Modal} = require('react-bootstrap');
 const {findIndex} = require('lodash');
 
-require('../../../../MapStore2/web/client/components/data/identify/css/identify.css');
+require('./css/identify.css');
 
 const Draggable = require('react-draggable');
 
 const MapInfoUtils = require('../../../../MapStore2/web/client/utils/MapInfoUtils');
 const Spinner = require('../../../../MapStore2/web/client/components/misc/spinners/BasicSpinner/BasicSpinner');
 const Message = require('../../../../MapStore2/web/client/components/I18N/Message');
-const DefaultViewer = require('../../../../MapStore2/web/client/components/data/identify/DefaultViewer');
-const GeocodeViewer = require('../../../../MapStore2/web/client/components/data/identify/GeocodeViewer');
+const DefaultViewer = require('./DefaultViewer');
 const Dialog = require('../../../../MapStore2/web/client/components/misc/Dialog');
+const moment = require('moment');
 
 const Identify = React.createClass({
     propTypes: {
@@ -49,10 +49,10 @@ const Identify = React.createClass({
         maxItems: React.PropTypes.number,
         excludeParams: React.PropTypes.array,
         includeOptions: React.PropTypes.array,
-        showRevGeocode: React.PropTypes.func,
+        showAitChart: React.PropTypes.func,
         hideRevGeocode: React.PropTypes.func,
         showModalReverse: React.PropTypes.bool,
-        reverseGeocodeData: React.PropTypes.object,
+        reverseGeocodeData: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array, React.PropTypes.string]),
         enableRevGeocode: React.PropTypes.bool,
         wrapRevGeocode: React.PropTypes.bool,
         panelClassName: React.PropTypes.string,
@@ -62,7 +62,9 @@ const Identify = React.createClass({
         headerGlyph: React.PropTypes.string,
         closeGlyph: React.PropTypes.string,
         allowMultiselection: React.PropTypes.bool,
-        warning: React.PropTypes.string
+        warning: React.PropTypes.string,
+        data: React.PropTypes.instanceOf(Date),
+        chartsData: React.PropTypes.array
     },
     getDefaultProps() {
         return {
@@ -84,21 +86,22 @@ const Identify = React.createClass({
             noQueryableLayers: () => {},
             clearWarning: () => {},
             changeMousePointer: () => {},
-            showRevGeocode: () => {},
+            showAitChart: () => {},
             hideRevGeocode: () => {},
             containerProps: {
                 continuous: false
             },
             showModalReverse: false,
-            reverseGeocodeData: {},
+            reverseGeocodeData: [],
             enableRevGeocode: true,
             wrapRevGeocode: false,
             queryableLayersFilter: MapInfoUtils.defaultQueryableFilter,
             style: {
                 position: "absolute",
-                maxWidth: "500px",
-                top: "56px",
-                right: "100px",
+                maxWidth: "1500px",
+                width: "900px",
+                top: "26px",
+                left: "250px",
                 zIndex: 1023,
                 boxShadow: "2px 2px 4px #A7A7A7"
             },
@@ -120,29 +123,36 @@ const Identify = React.createClass({
             headerGlyph: "",
             closeGlyph: "1-close",
             className: "square-button",
-            allowMultiselection: false
+            allowMultiselection: false,
+            date: new Date('2016-10-01'),
+            chartsData: []
         };
     },
     componentWillReceiveProps(newProps) {
         if (this.needsRefresh(newProps)) {
-            if (!newProps.point.modifiers || newProps.point.modifiers.ctrl !== true || !newProps.allowMultiselection) {
-                this.props.purgeResults();
-            }
-            const queryableLayers = newProps.layers.filter(newProps.queryableLayersFilter);
-            queryableLayers.forEach((layer) => {
-                const {url, request, metadata} = this.props.buildRequest(layer, newProps);
-                if (url) {
-                    this.props.sendRequest(url, request, metadata, this.filterRequestParams(layer));
-                } else {
-                    this.props.localRequest(layer, request, metadata);
-                }
+            // if (!newProps.point.modifiers || newProps.point.modifiers.ctrl !== true || !newProps.allowMultiselection) {
+            //     this.props.purgeResults();
+            // }
+            // const queryableLayers = newProps.layers.filter(newProps.queryableLayersFilter);
+            // queryableLayers.forEach((layer) => {
+            //     const {url, request, metadata} = this.props.buildRequest(layer, newProps);
+            //     if (url) {
+            //         this.props.sendRequest(url, request, metadata, this.filterRequestParams(layer));
+            //     } else {
+            //         this.props.localRequest(layer, request, metadata);
+            //     }
+            // });
 
-            });
-            if (queryableLayers.length === 0) {
-                this.props.noQueryableLayers();
-            } else {
-                this.props.showMarker();
-            }
+            let data = moment(newProps.data).format('YYYY-MM-DD');
+            this.props.showAitChart({lat: newProps.point.latlng.lat, lng: newProps.point.latlng.lng}, {data});
+
+            this.props.showMarker();
+
+            // if (queryableLayers.length === 0) {
+            //     this.props.noQueryableLayers();
+            // } else {
+            //     this.props.showMarker();
+            // }
 
         }
 
@@ -169,33 +179,18 @@ const Identify = React.createClass({
     },
     renderResults(missingResponses) {
         const Viewer = this.props.viewer;
-        return (<Viewer format={this.props.format} missingResponses={missingResponses} responses={this.props.responses} {...this.props.viewerOptions}/>);
-    },
-    renderReverseGeocode(latlng) {
-        if (this.props.enableRevGeocode) {
-            let reverseGeocodeData = this.props.reverseGeocodeData;
-            const Viewer = (<GeocodeViewer
-                latlng={latlng}
-                showRevGeocode={this.props.showRevGeocode}
-                showModalReverse={this.props.showModalReverse}
-                identifyRevGeocodeModalTitle={<Message msgId="identifyRevGeocodeModalTitle" />}
-                revGeocodeDisplayName={reverseGeocodeData.error ? <Message msgId="identifyRevGeocodeError" /> : this.props.reverseGeocodeData.display_name}
-                hideRevGeocode={this.props.hideRevGeocode}
-                identifyRevGeocodeSubmitText={<Message msgId="identifyRevGeocodeSubmitText" />}
-                identifyRevGeocodeCloseText={<Message msgId="identifyRevGeocodeCloseText" />}
-                modalOptions={{bsClass: 'mapstore-identify-modal modal'}} />);
-            return this.props.wrapRevGeocode ? (
-                <Panel
-                    header={<span><Glyphicon glyph="globe" />&nbsp;<Message msgId="identifyRevGeocodeHeader" /></span>}>
-                    {Viewer}
-                </Panel>
-            ) : (<div id="mapstore-identify-revgeocoder-chart">{Viewer}</div>);
-        }
-        return null;
+        let chartsData = this.props.chartsData;
+        return (
+                <Viewer
+                    format={this.props.format}
+                    missingResponses={missingResponses}
+                    responses={this.props.responses}
+                    {...this.props.viewerOptions}
+                    aitChartsData={chartsData.error ? <Message msgId="identifyRevGeocodeError" /> : chartsData}/>
+        );
     },
     renderContent() {
         let missingResponses = this.props.requests.length - this.props.responses.length;
-        let latlng = this.props.point.latlng;
         return this.props.asPanel ? (
             <Panel
                 defaultExpanded={true}
@@ -206,7 +201,6 @@ const Identify = React.createClass({
                 <div className={this.props.headerClassName ? this.props.headerClassName : "panel-heading"}>
                     {this.renderHeader(missingResponses)}
                 </div>
-                {this.renderReverseGeocode(latlng)}
                 {this.renderResults(missingResponses)}
             </Panel>
         ) : (
@@ -218,14 +212,13 @@ const Identify = React.createClass({
                 >
                 {this.renderHeader(missingResponses)}
                 <div role="body">
-                    {this.renderReverseGeocode(latlng)}
                     {this.renderResults(missingResponses)}
                 </div>
             </Dialog>
         );
     },
     render() {
-        if (this.props.enabled && this.props.requests.length !== 0) {
+        if (this.props.enabled && this.props.chartsData.length !== 0) {
             return this.props.draggable ? (
                     <Draggable>
                         {this.renderContent()}
