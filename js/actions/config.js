@@ -7,6 +7,7 @@
  */
 
 var axios = require('../../MapStore2/web/client/libs/ajax');
+const DateAPI = require('../utils/ManageDateUtils');
 const moment = require('moment');
 
 const MAP_CONFIG_LOADED = 'MAP_CONFIG_LOADED';
@@ -33,10 +34,9 @@ function loadMapConfig(configName, mapId, fromData, toData) {
         return axios.get(configName).then((response) => {
             if (typeof response.data === 'object') {
                 response.data.map.layers.map((data) => {
-                    // if (data && data.params && data.params.map === "spazializzazioni") {
                     if (data && data.group && (data.group === "Variabili Meteo.Pioggia" || data.group === "Variabili Meteo.Temperatura" || data.group === "Layer di Base")) {
-                        // Object.assign(data, {params: {data: moment(date).format('YYYY-MM-DD'), map: "spazializzazioni"}});
-                        Object.assign(data, {params: {fromData: moment(fromData).format('YYYY-MM-DD'), toData: moment(toData).format('YYYY-MM-DD')}});
+                        const mapFile = DateAPI.setAITMapFile(moment(fromData).format('YYYY-MM-DD'), moment(toData).format('YYYY-MM-DD'));
+                        Object.assign(data, {params: {map: "/opt/ait/" + mapFile, fromData: moment(fromData).format('YYYY-MM-DD'), toData: moment(toData).format('YYYY-MM-DD')}});
                     }
                 }, this);
                 dispatch(configureMap(response.data, mapId));

@@ -8,7 +8,8 @@
 var axios = require('../../MapStore2/web/client/libs/ajax');
 const urlUtil = require('url');
 const assign = require('object-assign');
-const DEFAULT_URL = '172.16.1.146/cgi-bin/aitchart.py';
+const DEFAULT_URL_AITCHART = 'geoportale.lamma.rete.toscana.it/cgi-bin/ait_app/aitchart.py';
+const DEFAULT_URL_AITSTATS = 'geoportale.lamma.rete.toscana.it/cgi-bin/ait_app/aitstats.py';
 
 // const defaultOptions = {
 //     format: 'json',
@@ -24,7 +25,16 @@ const Api = {
         var params = assign({lat: coords.lat, lng: coords.lng}, options || {});
         var url = urlUtil.format({
             protocol: window.location.protocol,
-            host: DEFAULT_URL,
+            host: DEFAULT_URL_AITCHART,
+            query: params
+        });
+        return axios.get(url); // TODO the jsonp method returns .promise and .cancel method,the last can be called when user cancel the query
+    },
+    aitstats: function(coords, options) {
+        var params = assign({lat: coords.lat, lng: coords.lng}, options || {});
+        var url = urlUtil.format({
+            protocol: window.location.protocol,
+            host: DEFAULT_URL_AITSTATS,
             query: params
         });
         return axios.get(url); // TODO the jsonp method returns .promise and .cancel method,the last can be called when user cancel the query

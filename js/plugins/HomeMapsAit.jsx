@@ -7,6 +7,8 @@
  */
 const React = require('react');
 const {Grid, Row, Col, Thumbnail} = require('react-bootstrap');
+const ModalMapsAit = require('./homemapsait/ModalMapsAit');
+const {clickThumbnail} = require('../actions/home');
 const {connect} = require('react-redux');
 const assign = require('object-assign');
 
@@ -18,10 +20,19 @@ const style = {
 
 const HomeMapsAit = React.createClass({
     propTypes: {
-        id: React.PropTypes.string
+        id: React.PropTypes.string,
+        showModal: React.PropTypes.bool,
+        imgSrc: React.PropTypes.string,
+        onClickThumbnail: React.PropTypes.func,
+        modalOptions: React.PropTypes.object
     },
     getDefaultProps() {
-        return {};
+        return {
+            showModal: false,
+            imgSrc: "",
+            onClickThumbnail: () => {},
+            modalOptions: {}
+        };
     },
     render() {
         return (
@@ -35,8 +46,14 @@ const HomeMapsAit = React.createClass({
                                 <h4>
                                     <strong>Cumulato Precipitazione ultimi 30 gg (mm)</strong>
                                 </h4>
-                                <a href="../../assets/img/Prec_ultimi_30gg.png" target="_blank">
-                                    <img className="img-fluid" src="../../assets/img/Prec_ultimi_30gg.png" alt="FFWI"/>
+                                <a onClick={() => this.props.onClickThumbnail(true, "http://geoportale.lamma.rete.toscana.it/assets/img/Prec_ultimi_30gg.png")}>
+                                    <ModalMapsAit
+                                        title={"Cumulato Precipitazione ultimi 30 gg (mm)"}
+                                        modalOptions={this.props.modalOptions}
+                                        showModal={this.props.showModal}
+                                        onClickThumbnail={this.props.onClickThumbnail}
+                                        imgSrc={this.props.imgSrc}/>
+                                    <img className="img-fluid" src="http://geoportale.lamma.rete.toscana.it/assets/img/Prec_ultimi_30gg.png" alt="FFWI"/>
                                 </a>
                             </Thumbnail>
                         </Col>
@@ -45,18 +62,30 @@ const HomeMapsAit = React.createClass({
                                 <h4>
                                     <strong>Anomalia Prec. ultimi 90gg (%)</strong>
                                 </h4>
-                                <a href="../../assets/img/Anomalia_Prec_ultimi_99gg.png" target="_blank">
-                                    <img className="img-fluid" src="../../assets/img/Anomalia_Prec_ultimi_99gg.png" alt="FFWI"/>
+                                <a onClick={() => this.props.onClickThumbnail(true, "http://geoportale.lamma.rete.toscana.it/assets/img/Anomalia_Prec_ultimi_90gg.png")}>
+                                    <ModalMapsAit
+                                        title={"Anomalia Prec. ultimi 90gg (%)"}
+                                        modalOptions={this.props.modalOptions}
+                                        showModal={this.props.showModal}
+                                        onClickThumbnail={this.props.onClickThumbnail}
+                                        imgSrc={this.props.imgSrc}/>
+                                    <img className="img-fluid" src="http://geoportale.lamma.rete.toscana.it/assets/img/Anomalia_Prec_ultimi_90gg.png" alt="FFWI"/>
                                 </a>
                             </Thumbnail>
                         </Col>
                         <Col sm={3}>
                             <Thumbnail className="gridcard" style={style}>
                                 <h4>
-                                    <strong>Anomalia Prec. Bilancio Idrico dal 1 ottobre(%)</strong>
+                                    <strong>Anomalia Prec. dal 1 ottobre(%)</strong>
                                 </h4>
-                                <a href="../../assets/img/Anomalia_Prec_bilancioidrico.png" target="_blank">
-                                    <img className="img-fluid" src="../../assets/img/Anomalia_Prec_bilancioidrico.png" alt="FFWI"/>
+                                <a onClick={() => this.props.onClickThumbnail(true, "http://geoportale.lamma.rete.toscana.it/assets/img/Anomalia_Prec_bilancioidrico.png")}>
+                                    <ModalMapsAit
+                                        title={"Anomalia Prec. Bilancio Idrico dal 1 ottobre(%)"}
+                                        modalOptions={this.props.modalOptions}
+                                        showModal={this.props.showModal}
+                                        onClickThumbnail={this.props.onClickThumbnail}
+                                        imgSrc={this.props.imgSrc}/>
+                                    <img className="img-fluid" src="http://geoportale.lamma.rete.toscana.it/assets/img/Anomalia_Prec_bilancioidrico.png" alt="FFWI"/>
                                 </a>
                             </Thumbnail>
                         </Col>
@@ -65,8 +94,14 @@ const HomeMapsAit = React.createClass({
                                 <h4>
                                     <strong>Anomalia Temperatura ultimi 30 gg (°C)</strong>
                                 </h4>
-                                <a href="../../assets/img/Anomalia_Tmed_ultimi_30gg.png" target="_blank">
-                                    <img className="img-fluid" src="../../assets/img/Anomalia_Tmed_ultimi_30gg.png" alt="FFWI"/>
+                                <a onClick={() => this.props.onClickThumbnail(true, "http://geoportale.lamma.rete.toscana.it/assets/img/Anomalia_Tmed_ultimi_30gg.png")}>
+                                    <ModalMapsAit
+                                        title={"Anomalia Temperatura ultimi 30 gg (°C)"}
+                                        modalOptions={this.props.modalOptions}
+                                        showModal={this.props.showModal}
+                                        onClickThumbnail={this.props.onClickThumbnail}
+                                        imgSrc={this.props.imgSrc}/>
+                                    <img className="img-fluid" src="http://geoportale.lamma.rete.toscana.it/assets/img/Anomalia_Tmed_ultimi_30gg.png" alt="FFWI"/>
                                 </a>
                             </Thumbnail>
                         </Col>
@@ -77,7 +112,12 @@ const HomeMapsAit = React.createClass({
     }
 });
 
-const HomeMapsAitPlugin = connect()(HomeMapsAit);
+const HomeMapsAitPlugin = connect((state) => ({
+    showModal: state.home && state.home.showModal || false,
+    imgSrc: state.home && state.home.imgSrc || ""
+}), {
+    onClickThumbnail: clickThumbnail
+})(HomeMapsAit);
 
 module.exports = {
     HomeMapsAitPlugin: assign(HomeMapsAitPlugin, {
@@ -89,5 +129,7 @@ module.exports = {
             priority: 1
         }
     }),
-    reducers: {}
+    reducers: {
+        home: require('../reducers/home')
+    }
 };

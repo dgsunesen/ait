@@ -8,14 +8,14 @@
 
 const React = require('react');
 const MapInfoUtils = require('../../../../MapStore2/web/client/utils/MapInfoUtils');
-const FeatureInfoUtils = require('../../../../MapStore2/web/client/utils/FeatureInfoUtils');
-const HTML = require('../../../../MapStore2/web/client/components/I18N/HTML');
+// const FeatureInfoUtils = require('../../../../MapStore2/web/client/utils/FeatureInfoUtils');
+// const HTML = require('../../../../MapStore2/web/client/components/I18N/HTML');
 const Message = require('../../../../MapStore2/web/client/components/I18N/Message');
 
 const {Alert, Panel, Accordion} = require('react-bootstrap');
 
 const DefaultHeader = require('./DefaultHeader');
-const ViewerPage = require('./viewers/ViewerPage');
+// const ViewerPage = require('./viewers/ViewerPage');
 const AitCharts = require('./viewers/AitCharts');
 
 const DefaultViewer = React.createClass({
@@ -136,19 +136,12 @@ const DefaultViewer = React.createClass({
         responses2.push(responses);
         return responses2.map((res, i) => {
             // const {response} = res;
-            const PageHeader = this.props.header;
+            // const PageHeader = this.props.header;
             return (
                 <Panel
                     eventKey={i}
                     key={i}
                     collapsible={this.props.collapsible}
-                    header={<span><PageHeader
-                        size={responses.length}
-                        {...this.props.headerOptions}
-                        index={this.state.index}
-                        onNext={() => this.next()}
-                        onPrevious={() => this.previous()}/></span>
-                    }
                     style={this.props.style}>
                     {this.renderAitCharts(res)}
                 </Panel>

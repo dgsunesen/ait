@@ -95,11 +95,6 @@ const ChangePeriodAit = React.createClass({
                             format={"YYYY"}
                             value={new Date("2016")}
                             onChange={this.props.onChangeYear}/>
-                        // <FormGroup bsSize="lg">
-                        //     <FormControl value={this.props.hidrologicYear} componentClass="select" ref="hidrologicYear" onChange={this.props.onChangeYear}>
-                        //         {this.props.hidrologicYears.map(type => <option value={type.key} key={type.key}>{type.label}</option>)}
-                        //     </FormControl>
-                        // </FormGroup>
                     </Col>
                     <Col sm={4}>
                         <Label><Message msgId="aitapp.selectCumulativeStartMonth"/></Label>

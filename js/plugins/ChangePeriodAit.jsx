@@ -43,7 +43,8 @@ const ChangePeriodAit = React.createClass({
         settings: React.PropTypes.object,
         layers: React.PropTypes.object,
         periodType: React.PropTypes.string,
-        periodTypes: React.PropTypes.array
+        periodTypes: React.PropTypes.array,
+        map: React.PropTypes.string
     },
     getDefaultProps() {
         return {
@@ -59,13 +60,15 @@ const ChangePeriodAit = React.createClass({
                 { key: "3", label: "6 Mesi"},
                 { key: "4", label: "dal 1° Ottobre"}
             ],
-            periodType: "1"
+            periodType: "1",
+            map: "ait.map"
         };
     },
     componentWillReceiveProps(nextProps) {
         if (this.props.id === "mapstore-changedate-map") {
-            if (this.props.fromData.getTime() !== nextProps.fromData.getTime()) {
-                this.updateParams({params: {fromData: moment(nextProps.fromData).format('YYYY-MM-DD'), toData: moment(nextProps.toData).format('YYYY-MM-DD')}});
+            if (this.props.fromData.getTime() !== nextProps.fromData.getTime() || this.props.toData.getTime() !== nextProps.toData.getTime()) {
+                const mapFile = DateAPI.setAITMapFile(nextProps.fromData, nextProps.toData);
+                this.updateParams({params: {map: "/opt/ait/" + mapFile, fromData: moment(nextProps.fromData).format('YYYY-MM-DD'), toData: moment(nextProps.toData).format('YYYY-MM-DD')}});
             }
         }
     },
@@ -86,7 +89,7 @@ const ChangePeriodAit = React.createClass({
                                 format={"DD MMMM, YYYY"}
                                 editFormat={"YYYY-MM-DD"}
                                 value={new Date(this.props.toData)}
-                                footer={false}
+                                footer={true}
                                 onChange={this.props.onChangeYear}/>
                     </Col>
                   </Row>

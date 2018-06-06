@@ -98,7 +98,7 @@ module.exports = {
         Toolbar: {
             name: 'infoChart',
             position: 5,
-            tooltip: "info.tooltip",
+            tooltip: "chartinfo.tooltip",
             icon: <Glyphicon glyph="glyphicon glyphicon-signal"/>,
             help: <Message msgId="helptexts.infoButton"/>,
             toggle: true

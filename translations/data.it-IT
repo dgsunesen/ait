@@ -243,11 +243,15 @@
         "info":{
             "tooltip": "Interroga gli oggetti sulla mappa"
         },
+        "chartinfo":{
+            "tooltip": "Visualizza il grafico"
+        },
         "expandtoolbar": {
             "tooltip": "Espandi / Collassa"
         },
         "getFeatureInfoTitle": "Informazioni Sulle Feature",
         "identifyTitle": "Informazioni Sulle Feature",
+        "identifyChartTitle": "Cumulato delle precipitazioni (mm): periodo 1995 - 2017",
         "identifyNoQueryableLayers": "Nessun livello interrogabile attivo",
         "identifyRevGeocodeHeader": "Coordinate",
         "identifyRevGeocodeModalTitle": "Indirizzo",

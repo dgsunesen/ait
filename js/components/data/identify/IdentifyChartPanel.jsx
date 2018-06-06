@@ -143,7 +143,7 @@ const Identify = React.createClass({
             //     }
             // });
 
-            let data = moment(newProps.data).format('YYYY-MM-DD');
+            let data = moment(newProps.data).subtract(1, 'day').format('YYYY-MM-DD');
             this.props.showAitChart({lat: newProps.point.latlng.lat, lng: newProps.point.latlng.lng}, {data});
 
             this.props.showMarker();
@@ -172,7 +172,7 @@ const Identify = React.createClass({
         return (
             <span role="header">
                 { (missing !== 0 ) ? <Spinner value={missing} sSize="sp-small" /> : null }
-                {this.props.headerGlyph ? <Glyphicon glyph={this.props.headerGlyph} /> : null}&nbsp;<Message msgId="identifyTitle" />
+                {this.props.headerGlyph ? <Glyphicon glyph={this.props.headerGlyph} /> : null}&nbsp;<Message msgId="identifyChartTitle" />
                 <button onClick={this.onModalHiding} className="close">{this.props.closeGlyph ? <Glyphicon glyph={this.props.closeGlyph}/> : <span>×</span>}</button>
             </span>
         );

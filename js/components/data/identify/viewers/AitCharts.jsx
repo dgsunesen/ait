@@ -8,7 +8,8 @@
 
 const React = require('react');
 const {AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend} = require('recharts');
-// const ElevationChartTooltip = require('./ElevationChartTooltip');
+// const CustomizedTooltip = require('./CustomizedTooltip');
+// const CustomizedLabel = require('./CustomizedLabel');
 
 module.exports = React.createClass({
     propTypes: {
@@ -65,7 +66,8 @@ module.exports = React.createClass({
                     fill="#FF0000"
                     fillOpacity={1}
                     fill="url(#st_value_clima)"
-                    activeDot={{r: 8}}/>
+                    activeDot={{r: 8}}
+                    name="Climatologia (mm)"/>
                 <Area
                     isAnimationActive={this.props.animated}
                     type="monotone"
@@ -74,7 +76,8 @@ module.exports = React.createClass({
                     fill="#8884d8"
                     fillOpacity={1}
                     fill="url(#st_value)"
-                    activeDot={{r: 8}}/>
+                    activeDot={{r: 8}}
+                    name="Valori Reali (mm)"/>
             </AreaChart>
         </div>
         );

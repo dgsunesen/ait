@@ -55,32 +55,32 @@ const MetadataModal = connect(
         onNewPermissionChoose: setControlProperty.bind(null, 'permissionEditor', 'newPermission')
     }, null, {withRef: true} )(require('../../MapStore2/web/client/components/maps/modals/MetadataModal'));
 
-const PaginationToolbar = connect((state) => {
-    if (!state.maps ) {
-        return {};
-    }
-    let {start, limit, results, loading, totalCount, searchText} = state.maps;
-    const total = Math.min(totalCount || 0, limit || 0);
-    const page = (results && total && Math.ceil(start / total)) || 0;
-    return {
-        page: page,
-        pageSize: limit,
-        items: results,
-        total: totalCount,
-        searchText,
-        loading
-    };
-}, {onSelect: loadMaps}, (stateProps, dispatchProps) => {
-
-    return {
-        ...stateProps,
-        onSelect: (pageNumber) => {
-            let start = stateProps.pageSize * pageNumber;
-            let limit = stateProps.pageSize;
-            dispatchProps.onSelect(ConfigUtils.getDefaults().geoStoreUrl, stateProps.searchText, {start, limit});
-        }
-    };
-})(require('../../MapStore2/web/client/components/misc/PaginationToolbar'));
+// const PaginationToolbar = connect((state) => {
+//     if (!state.maps ) {
+//         return {};
+//     }
+//     let {start, limit, results, loading, totalCount, searchText} = state.maps;
+//     const total = Math.min(totalCount || 0, limit || 0);
+//     const page = (results && total && Math.ceil(start / total)) || 0;
+//     return {
+//         page: page,
+//         pageSize: limit,
+//         items: results,
+//         total: totalCount,
+//         searchText,
+//         loading
+//     };
+// }, {onSelect: loadMaps}, (stateProps, dispatchProps) => {
+//
+//     return {
+//         ...stateProps,
+//         onSelect: (pageNumber) => {
+//             let start = stateProps.pageSize * pageNumber;
+//             let limit = stateProps.pageSize;
+//             dispatchProps.onSelect(ConfigUtils.getDefaults().geoStoreUrl, stateProps.searchText, {start, limit});
+//         }
+//     };
+// })(require('../../MapStore2/web/client/components/misc/PaginationToolbar'));
 
 const Maps = React.createClass({
     propTypes: {
